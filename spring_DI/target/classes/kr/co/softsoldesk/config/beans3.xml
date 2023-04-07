@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd" 
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+				xmlns="http://www.springframework.org/schema/beans">
+				
+	<bean id="t1" class="kr.co.softsoldesk.beans3.TestBean">
+		<!-- 제네릭이 String인 리스트-->
+		<property name="list1">
+			<list>	
+				<value>Java</value>
+				<value>Spring</value>
+				<value>Python</value>
+			</list>
+		</property>
+	
+		<!-- 제네릭이 Integer인 리스트-->
+		<property name="list2">
+			<list>	
+				<value type="int">100</value>
+				<value type="int">2000</value>
+				<value type="int">33333</value>
+			</list>
+		</property>
+	
+		<!-- 제네릭이 DataBean인 리스트-->
+		<property name="list3">
+			<list >	<!-- 문자열 외에는 반드시 타입을 선언하는 것을 지향 -->
+				<!-- 객체 직접 주입 -->
+				<bean  class="kr.co.softsoldesk.beans3.DataBean"/>
+				<bean  class="kr.co.softsoldesk.beans3.DataBean"/>
+							
+				<!-- 이미 선언된 객체를 참조 (ref bean='data_bean') -->
+				<ref bean='data_bean'/>
+				<ref bean='data_bean'/>
+			</list>
+		</property>
+		
+		
+		<!-- 제네릭이 String인 Set-->
+		<property name="set1">
+			<set>	
+				<value>Java</value>
+				<value>Spring</value>
+				<value>Python</value>
+				<value>Oracle</value>
+				<value>Python</value>
+			</set>
+		</property>
+	
+		<!-- 제네릭이 Integer인 Set-->
+		<property name="set2">
+			<set>	
+				<value type="int">100</value>
+				<value type="int">2000</value>
+				<value type="int">33333</value>
+				<value type="int">444444</value>
+				<value type="int">100</value>
+			</set>
+		</property>
+	
+		<!-- 제네릭이 DataBean인 Set-->
+		<property name="set3">
+			<set >	<!-- 문자열 외에는 반드시 타입을 선언하는 것을 지향 -->
+				<!-- 객체 직접 주입 -->
+				<bean  class="kr.co.softsoldesk.beans3.DataBean"/>
+				<bean  class="kr.co.softsoldesk.beans3.DataBean"/>
+							
+				<!-- 이미 선언된 객체를 참조 (ref bean='data_bean')
+				set은 같은 id를 사용할 경우 scope="prototype"이어도 같은 주소로 반환하므로 허용하지 않음 -->
+				<ref bean='data_bean'/>
+				<ref bean='data_bean'/>
+				<ref bean='data_bean'/>
+			</set>
+		</property>
+		
+		<property name="map1">
+			<map>
+				<entry key="a1" value="soft"/>
+				<entry key="a2" value="100" value-type="int"/>
+				<!-- 클래스 -->
+				<entry key="a3">
+					<!-- 객체 직접 주입 -->
+					<bean  class="kr.co.softsoldesk.beans3.DataBean"/>
+					<!-- 이미 정의된 객체 참조 -->
+				</entry>
+				<entry key="a4" value-ref="data_bean"/>
+				<!-- 리스트 -->
+				<entry key="a5">
+					<list>
+						<value>Java</value>
+						<value>Jsp</value>
+						<value>Spring</value>
+					</list>
+				</entry>				
+			</map>
+			</property>
+			
+			<!-- properties 등록	 -->
+			<property name="prop1">
+				<props>
+					<prop key="p1">soft</prop>
+					<prop key="p2">soldesk</prop>
+					<prop key="p3">BigData</prop>
+				</props>
+			</property>			
+	</bean>
+	<bean id='data_bean' class="kr.co.softsoldesk.beans3.DataBean" scope="prototype"/>
+	
+	<!-- 응용 -->
+	<bean id='addr' class="kr.co.softsoldesk.beans3.CollectionBean" >
+		<property name="addrlist">
+			<list>
+				<value>서울시 종로구 관철동</value>
+				<value>서울시 성동구 행당동</value>
+			</list>
+		</property>
+	
+	</bean>
+			
+</beans>
